@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>List of Books</h1>
+            <ul class="posts">
+                <% for(var i=0; i<posts.length; i++) {%>
+                    <li class="posts">
+                        <span>
+                            <%= " Title: " +posts[i].titlE+"."%>
+                        </span>
+                        <span>
+                            <%=" Description: " + posts[i].description%>
+                        </span>
+                        <span>
+                            <%=" Page: " + posts[i].page%>
+                        </span>
+                </li>
+              <% } %>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>
