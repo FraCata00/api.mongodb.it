@@ -15,9 +15,9 @@ router.get('/', async(req, res) => {
 //POST
 router.post('/', async(req, res) => {
     const customer = new Customer({
-        name: req.body.title,
-        surname: req.body.description,
-        age: req.body.page,
+        name: req.body.name,
+        surname: req.body.surname,
+        age: req.body.age,
         username: req.body.username
     });
     try {
