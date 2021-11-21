@@ -19,24 +19,26 @@ app.use(bodyParser.json());
 
 //import routes
 const postsRoute = require('./routes/posts');
+const customersRoute = require('./routes/customers')
 app.use('/posts', postsRoute);
+app.use('/customers', customersRoute);
 
 //another GET FRONTEND
 
 //routes GET
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.send('We are on home');
 });
 
 //connect
 mongoose.connect(process.env.DB_CONNECTION, () => {
     console.log('connect to mongodb Atlas'),
-    console.log('..welcome user..')
+        console.log('..welcome user..')
 });
 
 //also connect with function
 async function main() {
- 
+
     const uri = process.env.DB_CONNECTION
     const client = new MongoClient(uri);
 
@@ -60,7 +62,7 @@ async function findBooks(client) {
         results.forEach((result, i) => {
 
             console.log(result);
-            
+
         });
     } else {
         console.log('No books found');
