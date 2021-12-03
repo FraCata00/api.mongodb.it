@@ -16,6 +16,10 @@ const postSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    unit: {
+        type: Number,
+        required: true
     }
 });
 

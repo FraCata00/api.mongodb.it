@@ -17,7 +17,9 @@ router.post('/', async(req, res) => {
     const post = new Post({
         title: req.body.title,
         description: req.body.description,
-        page: req.body.page
+        page: req.body.page,
+        date: req.body.date,
+        unit: req.body.unit
     });
     try {
         const savedPost = await post.save();
@@ -50,7 +52,7 @@ router.delete('/postId', async(req, res) => {
 //PUT
 router.patch('/postId', async(req, res) => {
     try {
-        const updatedPost = await Post.updateOne({ _id: req.params.postId }, { $set: { title: req.body.title } }, { $set: { description: req.body.description } }, { $set: { page: req.body.page } }, );
+        const updatedPost = await Post.updateOne({ _id: req.params.postId }, { $set: { title: req.body.title } }, { $set: { description: req.body.description } }, { $set: { page: req.body.page } }, { $set: { date: req.body.date } }, { $set: { unit: req.body.unit } });
         res.json(updatedPost);
     } catch (error) {
         res.json({ message: error });

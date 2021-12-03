@@ -18,7 +18,9 @@ router.post('/', async(req, res) => {
         name: req.body.name,
         surname: req.body.surname,
         age: req.body.age,
-        username: req.body.username
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
     });
     try {
         const savedCustomer = await customer.save();
@@ -51,7 +53,7 @@ router.delete('/customerId', async(req, res) => {
 //PUT
 router.patch('/customerId', async(req, res) => {
     try {
-        const updatedCustomer = await Customer.updateOne({ _id: req.params.customerId }, { $set: { name: req.body.name } }, { $set: { surname: req.body.surname } }, { $set: { age: req.body.age } }, { $set: { username: req.body.username } }, );
+        const updatedCustomer = await Customer.updateOne({ _id: req.params.customerId }, { $set: { name: req.body.name } }, { $set: { surname: req.body.surname } }, { $set: { age: req.body.age } }, { $set: { username: req.body.username } }, { $set: { email: req.body.email } }, { $set: { password: req.body.password } }, );
         res.json(updatedCustomer);
     } catch (error) {
         res.json({ message: error });
