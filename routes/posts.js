@@ -6,7 +6,7 @@ const Post = require('../models/Post');
 router.get('/', async(req, res) => {
     try {
         const posts = await Post.find();
-        res.json(posts);
+        res.status(200).json(posts);
     } catch (error) {
         res.json({ message: error })
     }
@@ -23,7 +23,7 @@ router.post('/', async(req, res) => {
     });
     try {
         const savedPost = await post.save();
-        res.json(savedPost);
+        res.status(200).json(savedPost);
     } catch (error) {
         res.json({ message: error });
     }
@@ -33,7 +33,7 @@ router.post('/', async(req, res) => {
 router.get('/:postId', async(req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
-        res.json(post);
+        res.status(200).json(post);
     } catch (error) {
         res.json({ message: error });
     }
@@ -43,7 +43,7 @@ router.get('/:postId', async(req, res) => {
 router.delete('/postId', async(req, res) => {
     try {
         const removedPost = await Post.remove({ _id: req.params.postId });
-        res.json(removedPost);
+        res.status(200).json(removedPost);
     } catch (error) {
         res.json({ message: error });
     }
@@ -53,7 +53,7 @@ router.delete('/postId', async(req, res) => {
 router.patch('/postId', async(req, res) => {
     try {
         const updatedPost = await Post.updateOne({ _id: req.params.postId }, { $set: { title: req.body.title } }, { $set: { description: req.body.description } }, { $set: { page: req.body.page } }, { $set: { date: req.body.date } }, { $set: { unit: req.body.unit } });
-        res.json(updatedPost);
+        res.status(200).json(updatedPost);
     } catch (error) {
         res.json({ message: error });
     }
