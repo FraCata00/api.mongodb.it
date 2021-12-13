@@ -19,9 +19,11 @@ app.use(bodyParser.json());
 
 //import routes
 const postsRoute = require('./routes/posts');
-const customersRoute = require('./routes/customers')
+const customersRoute = require('./routes/customers');
+const borrowingRoute = require('./routes/borrowings');
 app.use('/posts', postsRoute);
 app.use('/customers', customersRoute);
+app.use('/borrowings', borrowingRoute);
 
 //another GET FRONTEND
 
