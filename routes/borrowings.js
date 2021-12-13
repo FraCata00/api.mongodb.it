@@ -6,7 +6,7 @@ const Borrowing = require('../models/Borrowing');
 router.get('/', async(req, res) => {
     try {
         const borrowings = await Borrowing.find();
-        res.json(borrowings);
+        res.status(200).json(borrowings);
     } catch (error) {
         res.json({ message: error })
     }
