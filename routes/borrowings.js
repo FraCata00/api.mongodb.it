@@ -23,7 +23,7 @@ router.post('/', async(req, res) => {
     });
     try {
         const savedBorrowing = await borrowing.save();
-        res.json(savedBorrowing);
+        res.status(200).json(savedBorrowing);
     } catch (error) {
         res.json({ message: error });
     }
