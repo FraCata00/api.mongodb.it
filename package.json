@@ -167,5 +167,8 @@
     "start": "nodemon app.js"
   },
   "author": "Francesco Cataldo",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "supertest": "^6.1.6"
+  }
 }
