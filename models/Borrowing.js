@@ -7,10 +7,10 @@ const borrowingSchema = mongoose.Schema({
             type: Object,
             proprerties: {
                 idPost: {
-                    type: ObjectId
+                    type: mongoose.Types.ObjectId
                 },
                 idCustomer: {
-                    type: ObjectId
+                    type: mongoose.Types.ObjectId
                 }
             }
         }
