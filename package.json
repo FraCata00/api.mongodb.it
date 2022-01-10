@@ -163,9 +163,15 @@
         "xdg-basedir": "^4.0.0",
         "yallist": "^4.0.0"
     },
+    "jest": {
+        "testEnvironment": "node",
+        "coveragePathIgnorePatterns": [
+            "/node_modules/"
+        ]
+    },
     "scripts": {
         "start": "nodemon app.js",
-        "test": "find ./test -name '*.test.js' | xargs mocha -R spec"
+        "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
     },
     "author": "Francesco Cataldo",
     "license": "ISC",
