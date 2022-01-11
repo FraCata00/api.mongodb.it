@@ -1,8 +1,20 @@
 const request = require('supertest');
 const app = require('../app');
 
-describe('Testing POSTS endpoint', function() {
-    it('respond with valid HTTP status code and description and message', async() => {
+//GET 
+describe('GET /posts', function() {
+    it('responds with json', async function() {
+        const response = await request(app)
+            .get('/posts')
+            .set('Accept', 'application/json')
+        expect(response.headers["Content-Type"]).toMatch(/json/);
+        expect(response.status).toEqual(200);
+    });
+});
+
+//POST
+describe('POST /posts', function() {
+    it('Testing POSTS endpoint', function(done) {
         // Make POST Request
         // Testing
         const res = await request(app).post('/posts').send({

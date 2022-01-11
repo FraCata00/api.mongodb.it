@@ -58,6 +58,7 @@
         "forwarded": "^0.2.0",
         "fresh": "^0.5.2",
         "get-stream": "^4.1.0",
+        "given2": "^2.1.7",
         "glob-parent": "^5.1.2",
         "global-dirs": "^3.0.0",
         "got": "^9.6.0",
