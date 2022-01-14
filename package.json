@@ -172,7 +172,7 @@
     },
     "scripts": {
         "start": "nodemon app.js",
-        "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
+        "test": "jest"
     },
     "author": "Francesco Cataldo",
     "license": "ISC",
