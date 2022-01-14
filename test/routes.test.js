@@ -4,11 +4,11 @@ const app = require('../app');
 //GET 
 describe('GET /posts', function() {
     it('responds with json', async function() {
-        const response = await request(app)
+        const res = await req(app)
             .get('/posts')
             .set('Accept', 'application/json')
-        expect(response.headers["Content-Type"]).toMatch(/json/);
-        expect(response.status).toEqual(200);
+        expect(res.headers["Content-Type"]).toMatch(/json/);
+        expect(res.status).toEqual(200);
     });
 });
 
@@ -17,13 +17,15 @@ describe('POST /posts', function() {
     it('Testing POSTS endpoint', function(done) {
         // Make POST Request
         // Testing
-        const res = await request(app).post('/posts').send({
-            title: 'How to write a post',
-            description: 'Testing the APIs with supertest',
-            page: 1,
-            date: new Date(),
-            unit: 1
-        });
+        const res = await req(app)
+            .post('/posts')
+            .send({
+                title: 'How to write a post',
+                description: 'Testing the APIs with supertest',
+                page: 1,
+                date: new Date(),
+                unit: 1
+            });
 
         // Compare response with expectations
         expect(res.status).toBe(201);
