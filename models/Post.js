@@ -26,5 +26,6 @@ const postSchema = mongoose.Schema({
         es_indexed: true
     }
 });
-postSchema.plugin(mongooseastic); // add Elasticsearch MongoDB plugin
+postSchema.plugin(mongoosastic); // add Elasticsearch MongoDB plugin
+//module.exports = mongoose.model('Posts', postSchema, 'posts'); // test API Failed
 module.exports = mongoose.model('Posts', postSchema);
