@@ -2,27 +2,33 @@ const mongoose = require('mongoose');
 const customerSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     },
     surname: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     },
     age: {
         type: Number,
-        required: true
+        required: true,
+        es_indexed: true
     },
     username: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        es_indexed: true
     }
 });
 
