@@ -29,4 +29,18 @@ const postSchema = mongoose.Schema({
 });
 postSchema.plugin(mongoosastic); // add Elasticsearch MongoDB plugin
 //module.exports = mongoose.model('Posts', postSchema, 'posts'); // test API Failed
+
 module.exports = mongoose.model('Posts', postSchema);
+
+
+/*
+Posts.search({
+    query_string: {
+        query: "Another books of Node.js, looke like the first and secondone"
+    }
+}, function(err, res) {
+    const posts = Post.find();
+    res.status(200).json(posts);
+    //res.json({ message: err })
+});
+*/
