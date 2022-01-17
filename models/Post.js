@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosastic = require('mongoosastic');
 const postSchema = mongoose.Schema({
     title: {
         type: String,
