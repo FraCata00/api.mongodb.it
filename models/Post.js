@@ -32,7 +32,7 @@ postSchema.plugin(mongoosastic); // add Elasticsearch MongoDB plugin
 
 module.exports = mongoose.model('Posts', postSchema);
 
-
+// Testing _search method on Elasticsearch
 /*
 Posts.search({
     query_string: {
