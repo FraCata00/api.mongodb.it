@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const admin = require('firebase-admin');
-const serviceAccount = require('./api-mongodb-it-firebase-adminsdk-5mbel-3cf9c9d806.json');
+//const admin = require('firebase-admin');
+//const serviceAccount = require('./api-mongodb-it-firebase-adminsdk-5mbel-3cf9c9d806.json');
 const cors = require('cors');
 const path = require('path');
 const ejs = require('ejs');
@@ -13,26 +13,6 @@ const port = 3000; //port
 require('dotenv/config');
 
 app.set('view engine', 'ejs');
-
-/*
-//FIREBASE
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDtfqdB8vQFNO1vk02mD0BSPSV3n4s0_6E",
-    authDomain: "api-mongodb-it.firebaseapp.com",
-    projectId: "api-mongodb-it",
-    storageBucket: "api-mongodb-it.appspot.com",
-    messagingSenderId: "336980452475",
-    appId: "1:336980452475:web:7cab3e95a64c206ed7eede",
-    measurementId: "G-9B45E5937R"
-};
-
-// Initialize Firebase
-const applications = initializeApp(firebaseConfig);
-const analytics = getAnalytics(applications);
-*/
 
 //Middlewares
 app.use(cors());
