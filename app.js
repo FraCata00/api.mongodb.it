@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const admin = require('firebase-admin');
+const serviceAccount = require('./api-mongodb-it-firebase-adminsdk-5mbel-3cf9c9d806.json');
 const cors = require('cors');
 const path = require('path');
 const ejs = require('ejs');
@@ -12,10 +14,136 @@ require('dotenv/config');
 
 app.set('view engine', 'ejs');
 
+/*
+//FIREBASE
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDtfqdB8vQFNO1vk02mD0BSPSV3n4s0_6E",
+    authDomain: "api-mongodb-it.firebaseapp.com",
+    projectId: "api-mongodb-it",
+    storageBucket: "api-mongodb-it.appspot.com",
+    messagingSenderId: "336980452475",
+    appId: "1:336980452475:web:7cab3e95a64c206ed7eede",
+    measurementId: "G-9B45E5937R"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+*/
 
 //Middlewares
 app.use(cors());
 app.use(bodyParser.json());
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: process.env.DB_CONNECTION
+});
+
+//Notification
+app.post('/sendToDevice', function(req, res) {
+    const fcmToken = req.body.token;
+    const type = req.body.type;
+    let notificationPayload;
+
+    if (type === 'notification') {
+        notificationPayload = {
+            "notification": notification
+        };
+    } else if (type === 'data') {
+        notificationPayload = {
+            "data": data
+        };
+    } else {
+        notificationPayload = {
+            "notification": notification,
+            "data": data
+        };
+    }
+
+    var notificationOptions = {
+        priority: "high"
+    };
+
+    admin.messaging().sendToDevice(fcmToken, notificationPayload, notificationOptions)
+        .then(function(response) {
+            console.log("Successfully sent notification:", response);
+            res.json({ "Message": "Successfully sent notification" });
+        })
+        .catch(function(error) {
+            console.log("Error sending notification:", error);
+            res.json({ "Message": "Error sending notification" });
+        });
+})
+
+app.post('/subscribeToTopic', function(req, res) {
+    const topic = req.body.topic;
+    const token = req.body.token;
+
+    admin.messaging().subscribeToTopic(token, topic)
+        .then(function(response) {
+            console.log("Successfully subscribed to topic:", response);
+            res.json({ "Message": "Successfully subscribed to topic." });
+        })
+        .catch(function(error) {
+            console.log("Error subscribing to topic:", error);
+            res.json({ "Message": "Error subscribing to topic." });
+        })
+});
+
+app.post('/sendToTopic', function(req, res) {
+    const topic = req.body.topic;
+    const type = req.body.type;
+    let notificationPayload;
+
+    if (type === 'notification') {
+        notificationPayload = {
+            "notification": notification
+        };
+    } else if (type === 'data') {
+        notificationPayload = {
+            "data": data
+        };
+    } else {
+        notificationPayload = {
+            "notification": notification,
+            "data": data
+        };
+    }
+
+    var notificationOptions = {
+        priority: "high"
+    };
+
+    admin.messaging().sendToTopic(topic, notificationPayload, notificationOptions)
+        .then(function(response) {
+            console.log("Successfully sent notification to a topic:", response);
+            res.json({ "Message": "Successfully sent notification to a topic." });
+        })
+        .catch(function(error) {
+            console.log("Error in sending notification to a topic:", error);
+            res.json({ "Message": "Error in sending notification to a topic." });
+        })
+});
+
+app.post('/unsubscribeFromTopic', function(req, res) {
+    const topic = req.body.topic;
+    const token = req.body.token;
+
+    admin.messaging().unsubscribeFromTopic(token, topic)
+        .then(function(response) {
+            console.log("Successfully subscribed to topic:", response);
+            res.json({ "Message": "Successfully subscribed to topic." });
+        })
+        .catch(function(error) {
+            console.log("Error subscribing to topic:", error);
+            res.json({ "Message": "Error subscribing to topic." });
+        })
+});
+
+
 
 //import routes
 const postsRoute = require('./routes/posts');
@@ -37,6 +165,15 @@ mongoose.connect(process.env.DB_CONNECTION, () => {
     console.log('connect to mongodb Atlas'),
         console.log('..welcome user..')
 });
+
+const notification = {
+    title: "A Push Notification Test",
+    body: "Test Body"
+};
+const data = {
+    key1: "value1",
+    key2: "value2"
+};
 
 //also connect with function
 async function main() {
