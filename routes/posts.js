@@ -30,7 +30,7 @@ router.post('/', async(req, res) => {
 });
 
 //GET with ID
-router.get('/:postId', async(req, res) => {
+router.get('/postId', async(req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
         res.status(200).json(post);
