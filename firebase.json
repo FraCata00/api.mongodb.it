@@ -43,7 +43,8 @@
       "enabled": true
     }
   },
-  "remoteconfig": {
-    "template": "remoteconfig.template.json"
+  "remoteconfig": {},
+  "functions": {
+    "source": "functions"
   }
 }
