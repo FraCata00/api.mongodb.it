@@ -9,6 +9,7 @@ describe('GET /posts', () => {
             .set('Accept', 'application/json')
             //expect(res.headers["Content-Type"]).toMatch(/json/);
         expect(res.statusCode).toEqual(201);
+        done();
     });
 });
 
@@ -31,5 +32,6 @@ describe('POST /posts', () => {
         expect(res.body.status).toBe('success');
         //expect(res.bodyState).toBe('success');
         expect(res.body.message).toBe('Post Saved Successfully.');
+        done();
     });
 });
