@@ -14,7 +14,7 @@ describe('GET /posts', function() {
 
 //POST
 describe('POST /posts', function() {
-    it('Testing POSTS endpoint', function(done) {
+    it('Testing POSTS endpoint', async function() {
         // Make POST Request
         // Testing
         const res = await req(app)
@@ -22,8 +22,7 @@ describe('POST /posts', function() {
             .send({
                 title: 'How to write a post',
                 description: 'Testing the APIs with supertest',
-                page: 1,
-                date: new Date(),
+                page: '1',
                 unit: 1
             });
 
@@ -31,7 +30,7 @@ describe('POST /posts', function() {
         expect(res.status).toBe(201);
         expect(res.body.status).toBe('success');
         expect(res.body.message).toBe('Post Saved Successfully.');
-        expect(res.body).toHaveProperty('post');
+        expect(res.body).toHaveProperty('posts');
 
     });
 });

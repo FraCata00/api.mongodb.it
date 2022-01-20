@@ -17,10 +17,12 @@ app.set('view engine', 'ejs');
 //Middlewares
 app.use(cors());
 app.use(bodyParser.json());
+/*
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: process.env.DB_CONNECTION
 });
+*/
 
 //Notification
 app.post('/sendToDevice', function(req, res) {
