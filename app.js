@@ -14,6 +14,8 @@ require('dotenv/config');
 
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.urlencoded({ extended: false }))
+
 //Middlewares
 app.use(cors());
 app.use(bodyParser.json());
@@ -102,11 +104,11 @@ app.post('/sendToTopic', function(req, res) {
     admin.messaging().sendToTopic(topic, notificationPayload, notificationOptions)
         .then(function(response) {
             console.log("Successfully sent notification to a topic:", response);
-            res.json({ "Message": "Successfully sent notification to a topic." });
+            res.json({ message: "Successfully sent notification to a topic." });
         })
         .catch(function(error) {
             console.log("Error in sending notification to a topic:", error);
-            res.json({ "Message": "Error in sending notification to a topic." });
+            res.json({ message: "Error in sending notification to a topic." });
         })
 });
 
@@ -117,11 +119,11 @@ app.post('/unsubscribeFromTopic', function(req, res) {
     admin.messaging().unsubscribeFromTopic(token, topic)
         .then(function(response) {
             console.log("Successfully subscribed to topic:", response);
-            res.json({ "Message": "Successfully subscribed to topic." });
+            res.json({ message: "Successfully subscribed to topic." });
         })
         .catch(function(error) {
             console.log("Error subscribing to topic:", error);
-            res.json({ "Message": "Error subscribing to topic." });
+            res.json({ message: "Error subscribing to topic." });
         })
 });
 
@@ -134,8 +136,6 @@ const borrowingRoute = require('./routes/borrowings');
 app.use('/posts', postsRoute);
 app.use('/customers', customersRoute);
 app.use('/borrowings', borrowingRoute);
-
-//another GET FRONTEND
 
 //routes GET
 app.get('/', (req, res) => {
@@ -192,3 +192,4 @@ async function findBooks(client) {
 
 //port server running
 app.listen(port);
+module.exports = app;

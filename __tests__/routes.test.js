@@ -2,19 +2,19 @@ const req = require('supertest');
 const app = require('../app');
 
 //GET 
-describe('GET /posts', function() {
-    it('responds with json', async function() {
+describe('GET /posts', () => {
+    it('responds with json', async() => {
         const res = await req(app)
             .get('/posts')
             .set('Accept', 'application/json')
-        expect(res.headers["Content-Type"]).toMatch(/json/);
-        expect(res.status).toEqual(200);
+            //expect(res.headers["Content-Type"]).toMatch(/json/);
+        expect(res.statusCode).toEqual(201);
     });
 });
 
 //POST
-describe('POST /posts', function() {
-    it('Testing POSTS endpoint', async function() {
+describe('POST /posts', () => {
+    it('Testing POSTS endpoint', async() => {
         // Make POST Request
         // Testing
         const res = await req(app)
@@ -27,10 +27,10 @@ describe('POST /posts', function() {
             });
 
         // Compare response with expectations
-        expect(res.status).toBe(201);
-        expect(res.body.status).toBe('success');
+        expect(res.statusCode).toEqual(201);
+        //expect(res.body.status).toBe('success');
+        //expect(res.bodyState).toBe('success');
         expect(res.body.message).toBe('Post Saved Successfully.');
-        expect(res.body).toHaveProperty('posts');
-
+        expect(res.body).toHaveProperty('post');
     });
 });
