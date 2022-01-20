@@ -28,9 +28,8 @@ describe('POST /posts', () => {
 
         // Compare response with expectations
         expect(res.statusCode).toEqual(201);
-        //expect(res.body.status).toBe('success');
+        expect(res.body.status).toBe('success');
         //expect(res.bodyState).toBe('success');
         expect(res.body.message).toBe('Post Saved Successfully.');
-        expect(res.body).toHaveProperty('post');
     });
 });

@@ -19,6 +19,19 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //Middlewares
 app.use(cors());
 app.use(bodyParser.json());
+
+//fix res.send status headers
+app.use(function(req, res, next) {
+    var _send = res.send;
+    var sent = false;
+    res.send = function(data) {
+        if (sent) return;
+        _send.bind(res)(data);
+        sent = true;
+    };
+    next();
+});
+
 /*
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),

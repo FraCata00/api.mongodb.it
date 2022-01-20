@@ -5,10 +5,11 @@ const Post = require('../models/Post');
 //GET
 router.get('/', async(req, res) => {
     try {
+        res.setHeader('Content-Type', 'application/json');
         const posts = await Post.find();
-        res.status(201).json(posts);
+        return res.status(201).json(posts);
     } catch (error) {
-        res.json({ message: error })
+        return res.json({ message: error })
     }
 });
 
@@ -22,12 +23,12 @@ router.post('/', async(req, res) => {
         unit: req.body.unit
     });
     try {
+        //res.setHeader('Content-Type', 'application/json');
         const savedPost = await post.save();
-        res.status(201).json(savedPost);
-        res.json({ message: 'Post Saved Successfully.' });
-
+        return res.status(201).send({ status: 'success', message: 'Post Saved Successfully.' }).json(savedPost);
+        //res.json({ message: 'Post Saved Successfully.' });
     } catch (error) {
-        res.json({ message: error });
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 
