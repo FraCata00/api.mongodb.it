@@ -7,6 +7,7 @@ router.get('/', async(req, res) => {
     try {
         res.setHeader('Content-Type', 'application/json');
         const posts = await Post.find();
+        //return res.status(201).send({ status: 'success', message: 'GET Posts Successfully' }).json(posts);
         return res.status(201).json(posts);
     } catch (error) {
         return res.json({ message: error })
@@ -33,32 +34,32 @@ router.post('/', async(req, res) => {
 });
 
 //GET with ID
-router.get('/postId', async(req, res) => {
+router.get('/:_id', async(req, res) => {
     try {
-        const post = await Post.findById({ _id: req.params.postId });
+        const post = await Post.findById({ _id: req.params._id });
         res.status(201).json(post);
     } catch (error) {
-        res.json({ message: error });
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 
 //DELETE
-router.delete('/postId', async(req, res) => {
+router.delete('/:_id', async(req, res) => {
     try {
-        const removedPost = await Post.remove({ _id: req.params.postId });
+        const removedPost = await Post.remove({ _id: req.params._id });
         res.status(201).json(removedPost);
     } catch (error) {
-        res.json({ message: error });
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 
 //PUT
-router.patch('/postId', async(req, res) => {
+router.patch('/:_id', async(req, res) => {
     try {
-        const updatedPost = await Post.updateOne({ _id: req.params.postId }, { $set: { title: req.body.title } }, { $set: { description: req.body.description } }, { $set: { page: req.body.page } }, { $set: { date: req.body.date } }, { $set: { unit: req.body.unit } });
+        const updatedPost = await Post.updateOne({ _id: req.params._id }, { $set: { title: req.body.title } }, { $set: { description: req.body.description } }, { $set: { page: req.body.page } }, { $set: { date: req.body.date } }, { $set: { unit: req.body.unit } });
         res.status(201).json(updatedPost);
     } catch (error) {
-        res.json({ message: error });
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 

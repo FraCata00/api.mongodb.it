@@ -5,10 +5,12 @@ const Customer = require('../models/Customer');
 //GET
 router.get('/', async(req, res) => {
     try {
+        res.setHeader('Content-Type', 'application/json');
         const customers = await Customer.find();
-        res.status(200).json(customers);
+        //return res.status(201).send({ status: 'success', message: 'GET Customer Successfully' }).json(customers);
+        return res.status(201).json(customers);
     } catch (error) {
-        res.json({ message: error })
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 
@@ -24,39 +26,39 @@ router.post('/', async(req, res) => {
     });
     try {
         const savedCustomer = await customer.save();
-        res.status(200).json(savedCustomer);
+        return res.status(201).send({ status: 'success', message: 'Customer Saved Successfully.' }).json(savedCustomer);
     } catch (error) {
-        res.json({ message: error });
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 
 //GET with ID
-router.get('/:customerId', async(req, res) => {
+router.get('/:_id', async(req, res) => {
     try {
-        const customer = await Customer.findById(req.params.customerId);
-        res.status(200).json(customer);
+        const customer = await Customer.findById(req.params._id);
+        res.status(201).json(customer);
     } catch (error) {
-        res.json({ message: error });
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 
 //DELETE
-router.delete('/customerId', async(req, res) => {
+router.delete('/:_id', async(req, res) => {
     try {
-        const removedCustomer = await Customer.remove({ _id: req.params.customerId });
-        res.status(200).json(removedCustomer);
+        const removedCustomer = await Customer.remove({ _id: req.params._id });
+        res.status(201).json(removedCustomer);
     } catch (error) {
-        res.json({ message: error });
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 
 //PUT
-router.patch('/customerId', async(req, res) => {
+router.patch('/:customerId', async(req, res) => {
     try {
         const updatedCustomer = await Customer.updateOne({ _id: req.params.customerId }, { $set: { name: req.body.name } }, { $set: { surname: req.body.surname } }, { $set: { age: req.body.age } }, { $set: { username: req.body.username } }, { $set: { email: req.body.email } }, { $set: { password: req.body.password } }, );
         res.status(200).json(updatedCustomer);
     } catch (error) {
-        res.json({ message: error });
+        return res.status(404).status({ status: 'error' }).json({ message: error });
     }
 });
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosastic = require('mongoosastic');
 const customerSchema = mongoose.Schema({
     name: {
         type: String,
@@ -32,4 +33,5 @@ const customerSchema = mongoose.Schema({
     }
 });
 
+customerSchema.plugin(mongoosastic);
 module.exports = mongoose.model('Customer', customerSchema);
