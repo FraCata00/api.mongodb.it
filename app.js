@@ -32,13 +32,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-/*
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: process.env.DB_CONNECTION
-});
-*/
-
 //Notification
 app.post('/sendToDevice', function(req, res) {
     const fcmToken = req.body.token;
