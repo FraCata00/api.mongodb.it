@@ -3,6 +3,7 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=fracata00&label=User&color=0e75b6&style=flat" alt="fracata00" /> </p>
 
+![](https://github.com/FraCata00/api.mongodb.it/blob/main/API_structure.png)
 
 - 🔭 Install every npm module and nodejs, npm, and Docker (just already installed)
 
