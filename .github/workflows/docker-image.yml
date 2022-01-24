@@ -21,6 +21,6 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag node-api-mongodb-it:$(date +%s)
+      run: docker build . --file Dockerfile --tag fracata/node-api-mongodb-it
     - name: Docker Push
-      run: docker push node-api-mongodb-it:$(date +%s)
+      run: docker push fracata/node-api-mongodb-it
