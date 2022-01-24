@@ -23,4 +23,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag node-api-mongodb-it:$(date +%s)
     - name: Docker Push
-      run: docker push fracata/node-api-mongodb-it
+      run: docker push node-api-mongodb-it
