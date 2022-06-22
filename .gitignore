@@ -66,6 +66,6 @@ node_modules/
 .env
 
 # APIKEY
-.APIKEYmongodbAtlas.txt
-.api-mongodb-it-firebase-adminsdk-5mbel-3cf9c9d806.json
+APIKEYmongodbAtlas.txt
+api-mongodb-it-firebase-adminsdk-5mbel-3cf9c9d806.json
 
